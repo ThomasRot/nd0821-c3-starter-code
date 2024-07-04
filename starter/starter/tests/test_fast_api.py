@@ -30,9 +30,28 @@ def test_predict_valid_data():
             "native-country": "United-States",
         },
     )
-    print(response.json())
     assert response.status_code == 200
     assert response.json() == {"prediction": 0}
+
+    high_salary_data = {
+        "age": 55,
+        "workclass": "Self-emp-not-inc",
+        "fnlgt": 209642,
+        "education": "HS-grad",
+        "education-num": 9,
+        "marital-status": "Married-civ-spouse",
+        "occupation": "Exec-managerial",
+        "relationship": "Husband",
+        "race": "White",
+        "sex": "Male",
+        "capital-gain": 14084,
+        "capital-loss": 0,
+        "hours-per-week": 80,
+        "native-country": "United-States",
+    }
+    response = client.post("/predict", json=high_salary_data)
+    assert response.status_code == 200
+    assert response.json() == {"prediction": 1}
 
 
 def test_predict_invalid_valid_data():

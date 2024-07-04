@@ -55,3 +55,23 @@ with open("../model/label_binarizer.pkl", "wb") as f:
 y_pred = inference(model, X_test)
 precision, recall, f1 = compute_model_metrics(y_test, y_pred)
 print(f"The model achieved {precision=}, {recall=} and {f1=}")
+
+with open("slice_output.txt", "w") as f:
+    for cat_feature in cat_features:
+        for option in test[cat_feature].unique():
+            df = test.copy()
+            df[cat_feature] = option
+            X_test, y_test, _, _ = process_data(
+                df,
+                categorical_features=cat_features,
+                label="salary",
+                encoder=encoder,
+                lb=lb,
+                training=False,
+            )
+            y_pred = inference(model, X_test)
+            precision, recall, f1 = compute_model_metrics(y_test, y_pred)
+            print(
+                f"For slice with {cat_feature}={option} the model achieved {precision=}, {recall=} and {f1=}",
+                file=f,
+            )

@@ -1,1 +1,1 @@
-Change directory to starter (not starter/starter). Run with `PYTHONPATH=$(pwd) pytest tests`
+Change directory to starter/starter. Run with `PYTHONPATH=$(pwd) pytest tests`
