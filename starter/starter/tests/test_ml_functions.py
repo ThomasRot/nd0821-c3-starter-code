@@ -30,7 +30,7 @@ def _is_fitted(model, X_train) -> bool:
     try:
         model.predict(X_train)
         return True
-    except NotFittedError as e:
+    except NotFittedError:
         return False
 
 
